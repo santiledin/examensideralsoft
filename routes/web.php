@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\DeviceController;
+use App\Http\Controllers\PersonController;
+use App\Models\Person;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,5 +17,10 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
-});
+    $personas = Person::all();
+    return view('welcome',compact('personas'));
+})->name('home');
+
+Route::resource('/person',PersonController::class);
+
+Route::resource('/device',DeviceController::class);
